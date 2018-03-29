@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input, OnInit } from '@angular/core';
+import { Directive, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
 
 @Directive({
   selector: '[appAddAttribute]'
@@ -6,10 +6,10 @@ import { Directive, ElementRef, Input, OnInit } from '@angular/core';
 export class AppAddAttributeDirective implements OnInit {
   @Input() appAddAttribute;
 
-  constructor(private element: ElementRef) {
+  constructor(private element: ElementRef, private renderer: Renderer2) {
   }
 
   ngOnInit() {
-    this.element.nativeElement.setAttribute(this.appAddAttribute, '');
+    this.renderer.setAttribute(this.element.nativeElement, this.appAddAttribute, '');
   }
 }
