@@ -3,9 +3,9 @@ import { AfterViewChecked, Component, ElementRef, TemplateRef, ViewChild, ViewCh
 @Component({
   selector: 'app-root',
   template: `
+    <button (click)="show()">Show child component</button>
     <button (click)="remove()">Remove child component</button>
-    <ng-container #vc></ng-container>
-    <ng-template [appRemoveElement]="removeElement">
+    <ng-template [appNgIfDirective]="showChildComponent">
       <app-a-comp #c></app-a-comp>
     </ng-template>
   `
@@ -14,13 +14,17 @@ export class AppComponent implements AfterViewChecked {
   @ViewChildren('c', {read: ElementRef}) childComps;
   @ViewChild(TemplateRef) template;
   @ViewChild('vc', {read: ViewContainerRef}) vc;
-  removeElement = false;
+  showChildComponent = true;
 
   ngAfterViewChecked() {
     console.log('number of child components: ' + this.childComps.length);
   }
 
+  show() {
+    this.showChildComponent = true;
+  }
+
   remove() {
-    this.removeElement = true;
+    this.showChildComponent = false;
   }
 }
