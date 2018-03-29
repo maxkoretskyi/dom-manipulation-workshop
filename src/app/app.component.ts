@@ -1,30 +1,25 @@
 import { AfterViewChecked, Component, ElementRef, Renderer2, ViewChildren } from '@angular/core';
+import { AComponent } from './a-component';
 
 @Component({
   selector: 'app-root',
   template: `
     <button (click)="remove()">Remove child component</button>
-    <app-a-comp #c></app-a-comp>
+    <app-a-comp [appRemoveElement]="removeElement" [parentElement]="hostElement"></app-a-comp>
   `
 })
 export class AppComponent implements AfterViewChecked {
-  @ViewChildren('c', {read: ElementRef}) childComps;
+  @ViewChildren(AComponent) childComps;
+  removeElement = false;
 
-  constructor(private hostElement: ElementRef, private renderer: Renderer2) {
+  constructor(public hostElement: ElementRef) {
   }
 
   ngAfterViewChecked() {
-    console.log('number of child components: ' + this.childComps.length);
+    console.log(this.childComps.length);
   }
 
   remove() {
-    this.renderer.removeChild(
-      this.hostElement.nativeElement,
-      this.childComps.first.nativeElement
-    );
-
-    // trigger change detection in 3 seconds
-    setTimeout(() => {
-    }, 3000);
+    this.removeElement = true;
   }
 }
