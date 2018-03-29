@@ -1,10 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
+import { AppAddAttributeDirective } from './app-add-attribute.directive';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AppAddAttributeDirective
   ],
   entryComponents: [],
   imports: [
