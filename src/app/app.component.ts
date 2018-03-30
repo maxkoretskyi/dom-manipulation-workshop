@@ -1,15 +1,15 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   template: `
     <div class="top">
       <div>top</div>
-      <ng-container [ngTemplateOutlet]="leftT"></ng-container>
+      <ng-container #top></ng-container>
     </div>
     <div class="bottom">
       <div>bottom</div>
-      <ng-container [ngTemplateOutlet]="rightT"></ng-container>
+      <ng-container #bottom></ng-container>
     </div>
     <ng-template>
       <app-a-comp></app-a-comp>
@@ -20,20 +20,15 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 })
 export class AppComponent implements OnInit {
   @ViewChild(TemplateRef) t;
-  leftT = null;
-  rightT = null;
+  @ViewChild('top', {read: ViewContainerRef}) top;
+  @ViewChild('bottom', {read: ViewContainerRef}) bottom;
 
   ngOnInit() {
-    this.leftT = this.t;
+    this.top.createEmbeddedView(this.t);
   }
 
   move() {
-    if (this.leftT) {
-      this.leftT = null;
-      this.rightT = this.t;
-    } else {
-      this.leftT = this.t;
-      this.rightT = null;
-    }
+    const viewRef = this.top.detach(0);
+    this.bottom.insert(viewRef);
   }
 }
