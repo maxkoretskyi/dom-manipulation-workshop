@@ -1,24 +1,20 @@
 import { Component } from '@angular/core';
+import { AiDBComponent } from './aid-b-component';
+import { AiDAComponent } from './aid-a-component';
 
 @Component({
   selector: 'aid-root',
   template: `
-    <button (click)="show()">Show child component</button>
-    <button (click)="remove()">Remove child component</button>
-    <ng-template [aidNgIf]="showChildComponent">
-      <aid-a-comp></aid-a-comp>
-    </ng-template>
+    <button (click)="show('a')">Show A component</button>
+    <button (click)="show('b')">Show B component</button>
+    <ng-container [aidRenderDynamicComponent]="component"></ng-container>
   `
 })
 export class AiDComponent {
-  showChildComponent = true;
+  component = null;
 
-  show() {
-    this.showChildComponent = true;
-  }
-
-  remove() {
-    this.showChildComponent = false;
+  show(type) {
+    this.component = type === 'a' ? AiDAComponent : AiDBComponent;
   }
 }
 

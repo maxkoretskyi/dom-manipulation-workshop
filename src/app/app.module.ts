@@ -3,14 +3,14 @@ import { NgModule } from '@angular/core';
 import { AiDComponent } from './app.component';
 import { AiDBComponent } from './aid-b-component';
 import { AiDAComponent } from './aid-a-component';
-import { AiDNgIfDirective } from './aid-ng-if.directive';
+import { AiDRenderDynamicComponentDirective } from './aid-render-dynamic-component.directive';
 
 @NgModule({
   declarations: [
     AiDComponent,
     AiDAComponent,
     AiDBComponent,
-    AiDNgIfDirective
+    AiDRenderDynamicComponentDirective
   ],
   imports: [
     BrowserModule

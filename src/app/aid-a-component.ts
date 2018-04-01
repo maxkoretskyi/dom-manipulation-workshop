@@ -4,7 +4,6 @@ import { Component, DoCheck } from '@angular/core';
   selector: 'aid-a-comp',
   template: `
     <div>I am A component</div>
-    <aid-b-comp></aid-b-comp>
   `
 })
 export class AiDAComponent implements DoCheck {
