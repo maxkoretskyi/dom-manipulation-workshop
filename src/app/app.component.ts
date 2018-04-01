@@ -4,24 +4,21 @@ import { AfterViewChecked, Component, ElementRef, Renderer2, ViewChildren } from
   selector: 'aid-root',
   template: `
     <button (click)="remove()">Remove child component</button>
-    <aid-a-comp #c></aid-a-comp>
+    <aid-a-comp #c [aidRemoveElement]="removeElement" [parentElement]="hostElement"></aid-a-comp>
   `
 })
 export class AiDComponent implements AfterViewChecked {
   @ViewChildren('c', {read: ElementRef}) childComps;
+  removeElement = false;
 
-  constructor(private hostElement: ElementRef, private renderer: Renderer2) {
+  constructor(public hostElement: ElementRef) {
   }
 
   ngAfterViewChecked() {
-    console.log('number of child components: ' + this.childComps.length);
+    console.log(this.childComps.length);
   }
 
   remove() {
-    this.renderer.removeChild(
-      this.hostElement.nativeElement,
-      this.childComps.first.nativeElement
-    );
+    this.removeElement = true;
   }
 }
-
