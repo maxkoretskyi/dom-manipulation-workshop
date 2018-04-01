@@ -1,12 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AiDComponent } from './app.component';
-import { AiDAddAttributeDirective } from './aid-add-attribute.directive';
+import { AiDAComponent } from './aid-a-component';
+import { AiDBComponent } from './aid-b-component';
 
 @NgModule({
   declarations: [
     AiDComponent,
-    AiDAddAttributeDirective
+    AiDAComponent,
+    AiDBComponent
   ],
   entryComponents: [],
   imports: [
