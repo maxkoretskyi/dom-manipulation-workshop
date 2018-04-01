@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'aid-root',
@@ -6,5 +6,10 @@ import { Component, ViewEncapsulation } from '@angular/core';
   styles: ['[highlight] {color: green}'],
   encapsulation: ViewEncapsulation.None
 })
-export class AiDComponent {
+export class AiDComponent implements AfterViewInit {
+  @ViewChild('el') span: ElementRef;
+
+  ngAfterViewInit() {
+    this.span.nativeElement.setAttribute('highlight', '');
+  }
 }
