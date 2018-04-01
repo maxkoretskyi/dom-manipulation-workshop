@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, ViewContainerRef, ViewRef } from '@angular/core';
 
 @Component({
   selector: 'aid-root',
@@ -29,11 +29,11 @@ export class AiDComponent implements OnInit {
 
   move() {
     if (this.top.length === 0) {
-      this.bottom.clear();
-      this.top.createEmbeddedView(this.t);
+      const viewRef = this.bottom.detach(0);
+      this.top.insert(viewRef);
     } else {
-      this.top.clear();
-      this.bottom.createEmbeddedView(this.t);
+      const viewRef = this.top.detach(0);
+      this.bottom.insert(viewRef);
     }
   }
 }
