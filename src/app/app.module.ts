@@ -1,16 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AiDComponent } from './app.component';
-import { AiDRemoveElementDirective } from './aid-remove-element.directive';
 import { AiDBComponent } from './aid-b-component';
 import { AiDAComponent } from './aid-a-component';
+import { AiDNgIfDirective } from './aid-ng-if.directive';
 
 @NgModule({
   declarations: [
     AiDComponent,
     AiDAComponent,
     AiDBComponent,
-    AiDRemoveElementDirective
+    AiDNgIfDirective
   ],
   imports: [
     BrowserModule
