@@ -12,6 +12,10 @@ import { AiDRenderDynamicComponentDirective } from './aid-render-dynamic-compone
     AiDBComponent,
     AiDRenderDynamicComponentDirective
   ],
+  entryComponents: [
+    AiDAComponent,
+    AiDBComponent
+  ],
   imports: [
     BrowserModule
   ],
