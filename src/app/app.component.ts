@@ -1,24 +1,38 @@
-import { AfterViewChecked, Component, ElementRef, Renderer2, ViewChildren } from '@angular/core';
+import {
+  AfterViewChecked,
+  AfterViewInit,
+  Component,
+  ElementRef,
+  TemplateRef,
+  ViewChild,
+  ViewChildren,
+  ViewContainerRef
+} from '@angular/core';
 
 @Component({
   selector: 'aid-root',
   template: `
     <button (click)="remove()">Remove child component</button>
-    <aid-a-comp #c [aidRemoveElement]="removeElement" [parentElement]="hostElement"></aid-a-comp>
+    <ng-container #vc></ng-container>
+    <ng-template>
+      <aid-a-comp #c></aid-a-comp>
+    </ng-template>
   `
 })
-export class AiDComponent implements AfterViewChecked {
+export class AiDComponent implements AfterViewChecked, AfterViewInit {
   @ViewChildren('c', {read: ElementRef}) childComps;
-  removeElement = false;
+  @ViewChild(TemplateRef) template;
+  @ViewChild('vc', {read: ViewContainerRef}) vc;
 
-  constructor(public hostElement: ElementRef) {
+  ngAfterViewInit() {
+    this.vc.createEmbeddedView(this.template);
   }
 
   ngAfterViewChecked() {
-    console.log(this.childComps.length);
+    console.log('number of child components: ' + this.childComps.length);
   }
 
   remove() {
-    this.removeElement = true;
+    this.vc.remove();
   }
 }

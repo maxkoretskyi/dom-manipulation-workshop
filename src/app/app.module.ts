@@ -3,14 +3,12 @@ import { NgModule } from '@angular/core';
 import { AiDAComponent } from './aid-a-component';
 import { AiDBComponent } from './aid-b-component';
 import { AiDComponent } from './app.component';
-import { AiDRemoveElementDirective } from './remove-element.directive';
 
 @NgModule({
   declarations: [
     AiDComponent,
     AiDAComponent,
-    AiDBComponent,
-    AiDRemoveElementDirective
+    AiDBComponent
   ],
   imports: [
     BrowserModule
