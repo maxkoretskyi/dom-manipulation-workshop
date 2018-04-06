@@ -4,8 +4,9 @@ import { AiDComponent } from './app.component';
 
 @NgModule({
   declarations: [
-    AiDComponent,
+    AiDComponent
   ],
+  entryComponents: [],
   imports: [
     BrowserModule
   ],
