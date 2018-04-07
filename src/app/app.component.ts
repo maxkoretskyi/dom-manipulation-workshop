@@ -1,38 +1,19 @@
-import {
-  AfterViewChecked,
-  AfterViewInit,
-  Component,
-  ElementRef, QueryList,
-  TemplateRef,
-  ViewChild,
-  ViewChildren,
-  ViewContainerRef
-} from '@angular/core';
+import { Component } from '@angular/core';
+import { AiDBComponent } from './aid-b-component';
+import { AiDAComponent } from './aid-a-component';
 
 @Component({
   selector: 'aid-root',
   template: `
-    <button (click)="remove()">Remove child component</button>
-    <ng-container #vc></ng-container>
-    <ng-template>
-      <aid-a-comp #c></aid-a-comp>
-    </ng-template>
+    <button (click)="show('a')">Show A component</button>
+    <button (click)="show('b')">Show B component</button>
   `
 })
-export class AiDComponent implements AfterViewChecked, AfterViewInit {
-  @ViewChildren('c', {read: ElementRef}) childComps: QueryList<ElementRef>;
-  @ViewChild(TemplateRef) template: TemplateRef<null>;
-  @ViewChild('vc', {read: ViewContainerRef}) vc: ViewContainerRef;
+export class AiDComponent {
+  component = null;
 
-  ngAfterViewInit() {
-    this.vc.createEmbeddedView(this.template);
-  }
-
-  ngAfterViewChecked() {
-    console.log('number of child components: ' + this.childComps.length);
-  }
-
-  remove() {
-    this.vc.remove();
+  show(type) {
+    this.component = type === 'a' ? AiDAComponent : AiDBComponent;
   }
 }
+
