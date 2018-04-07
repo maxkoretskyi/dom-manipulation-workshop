@@ -1,34 +1,23 @@
-import { Component, ComponentFactoryResolver, ComponentRef, Injector, OnInit, ViewChild, ViewContainerRef, ViewRef } from '@angular/core';
-import { AiDBComponent } from './aid-b-component';
-import { AiDAComponent } from './aid-a-component';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'aid-root',
   template: `
-    <button (click)="show('a')">Show A component</button>
-    <button (click)="show('b')">Show B component</button>
-    <ng-container #vc></ng-container>
-  `
+    <div class="top">
+      <div>top</div>
+      <ng-container #top></ng-container>
+    </div>
+    <div class="bottom">
+      <div>bottom</div>
+      <ng-container #bottom></ng-container>
+    </div>
+    <button (click)="move()">move</button>
+  `,
+  styles: ['.top, .bottom {border: 1px solid black; padding: 10px; margin: 10px 0; height: 30px; }']
 })
-export class AiDComponent implements OnInit {
-  @ViewChild('vc', {read: ViewContainerRef}) vc: ViewContainerRef;
-  aComponentRef: ComponentRef<AiDAComponent>;
-  bComponentRef: ComponentRef<AiDBComponent>;
-
-  constructor(private resolver: ComponentFactoryResolver, private injector: Injector) {
-  }
-
-  ngOnInit() {
-    const aComponentFactory = this.resolver.resolveComponentFactory(AiDAComponent);
-    const bComponentFactory = this.resolver.resolveComponentFactory(AiDBComponent);
-    this.aComponentRef = aComponentFactory.create(this.injector);
-    this.bComponentRef = bComponentFactory.create(this.injector);
-  }
-
-  show(type) {
-    const view = type === 'a' ? this.aComponentRef.hostView : this.bComponentRef.hostView;
-    this.vc.detach();
-    this.vc.insert(view);
+export class AiDComponent {
+  move() {
   }
 }
+
 
