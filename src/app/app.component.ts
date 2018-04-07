@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ComponentFactoryResolver, ComponentRef, Injector, OnInit, ViewChild, ViewContainerRef, ViewRef } from '@angular/core';
 import { AiDBComponent } from './aid-b-component';
 import { AiDAComponent } from './aid-a-component';
 
@@ -10,18 +10,25 @@ import { AiDAComponent } from './aid-a-component';
     <ng-container #vc></ng-container>
   `
 })
-export class AiDComponent {
+export class AiDComponent implements OnInit {
   @ViewChild('vc', {read: ViewContainerRef}) vc: ViewContainerRef;
-  component = null;
+  aComponentRef: ComponentRef<AiDAComponent>;
+  bComponentRef: ComponentRef<AiDBComponent>;
 
-  constructor(private resolver: ComponentFactoryResolver) {
+  constructor(private resolver: ComponentFactoryResolver, private injector: Injector) {
+  }
+
+  ngOnInit() {
+    const aComponentFactory = this.resolver.resolveComponentFactory(AiDAComponent);
+    const bComponentFactory = this.resolver.resolveComponentFactory(AiDBComponent);
+    this.aComponentRef = aComponentFactory.create(this.injector);
+    this.bComponentRef = bComponentFactory.create(this.injector);
   }
 
   show(type) {
-    this.component = type === 'a' ? AiDAComponent : AiDBComponent;
-    const factory = this.resolver.resolveComponentFactory(this.component);
-    this.vc.clear();
-    this.vc.createComponent(factory);
+    const view = type === 'a' ? this.aComponentRef.hostView : this.bComponentRef.hostView;
+    this.vc.detach();
+    this.vc.insert(view);
   }
 }
 
