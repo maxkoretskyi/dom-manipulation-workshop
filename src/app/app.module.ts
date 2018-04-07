@@ -10,6 +10,10 @@ import { AiDAComponent } from './aid-a-component';
     AiDAComponent,
     AiDBComponent
   ],
+  entryComponents: [
+    AiDAComponent,
+    AiDBComponent
+  ],
   imports: [
     BrowserModule
   ],
