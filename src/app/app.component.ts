@@ -1,9 +1,20 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
 
 @Component({
   selector: 'aid-root',
-  template: `<span [aidAddAttribute]="'highlight'">I want to be green</span>`,
-  styles: ['[highlight] {color: green}']
+  template: `
+    <button (click)="remove()">Remove child component</button>
+    <aid-a-comp #c></aid-a-comp>
+  `
 })
-export class AiDComponent {
+export class AiDComponent implements AfterViewChecked {
+  @ViewChildren('c', {read: ElementRef}) childComps: QueryList<ElementRef>;
+
+  ngAfterViewChecked() {
+    console.log('number of child components: ' + this.childComps.length);
+  }
+
+  remove() {
+  }
 }
+
