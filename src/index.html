@@ -2,17 +2,82 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>DomManipulationWorkshop</title>
+  <title>Dom Manipulation Workshop</title>
   <base href="/">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico?v=2">
+  <style>
+    body {
+      width: 500px;
+      min-height: 500px;
+      margin: 0 auto;
+      border: 3px solid rgba(195, 8, 3, 1);
+      position: relative;
+    }
+
+    header {
+      background-color: rgba(195, 8, 3, 1);
+      padding: 5px;
+    }
+
+    header img {
+      display: block;
+      margin: 0 auto;
+      width: 200px;
+      height: 150px;
+    }
+
+    header div {
+      text-align: center;
+      color: white;
+      font-size: 18px;
+      margin: 5px 0;
+    }
+
+    section {
+      padding: 10px;
+    }
+
+    footer {
+      background-color: rgba(195, 8, 3, 1);
+      height: 25px;
+      width: 100%;
+      padding: 12px 0;
+      position: absolute;
+      bottom: 0;
+    }
+
+    footer img {
+      height: 25px;
+      position: absolute;
+      top: 15px;
+      left: 160px;
+    }
+
+    footer div {
+      color: white;
+      position: absolute;
+      top: 16px;
+      left: 200px;
+      font-size: 18px;
+    }
+  </style>
 </head>
 <body>
-<header style="margin-bottom: 20px">
-  Angular In Depth
-  http://blog.angularindepth.com
+<header>
+  <a href="https://blog.angularindepth.com" target="_blank">
+    <img src="assets/Logo_AinD_01.svg">
+  </a>
 </header>
-<aid-root></aid-root>
+<section>
+  <app-root></app-root>
+</section>
+<footer>
+  <a href="https://twitter.com/maxim_koretskyi" target="_blank">
+    <img src="assets/twitter.png">
+    <div>maxim_koretskyi</div>
+  </a>
+</footer>
 </body>
 </html>
