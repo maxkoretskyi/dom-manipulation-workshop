@@ -1,4 +1,4 @@
-import { Component, DoCheck } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'b-comp',
@@ -6,8 +6,5 @@ import { Component, DoCheck } from '@angular/core';
     <div>I am B component</div>
   `
 })
-export class BComponent implements DoCheck {
-  ngDoCheck() {
-    console.log('ngDoCheck is called on BComponent');
-  }
+export class BComponent {
 }
