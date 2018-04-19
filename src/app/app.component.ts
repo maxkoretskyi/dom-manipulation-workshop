@@ -1,17 +1,32 @@
-import { AfterViewChecked, Component, ElementRef, QueryList, Renderer2, ViewChildren } from '@angular/core';
+import {
+  AfterViewChecked,
+  AfterViewInit,
+  Component,
+  ElementRef,
+  QueryList,
+  TemplateRef,
+  ViewChild,
+  ViewChildren,
+  ViewContainerRef
+} from '@angular/core';
 
 @Component({
   selector: 'app-root',
   template: `
     <button (click)="remove()">Remove child component</button>
-    <a-comp #c></a-comp>
+    <ng-container #vc></ng-container>
+    <ng-template>
+      <a-comp #c></a-comp>
+    </ng-template>
   `
 })
-export class AppComponent implements AfterViewChecked {
+export class AppComponent implements AfterViewInit, AfterViewChecked {
   @ViewChildren('c', {read: ElementRef}) childComps: QueryList<ElementRef>;
+  @ViewChild('vc', {read: ViewContainerRef}) viewContainer: ViewContainerRef;
+  @ViewChild(TemplateRef) template: TemplateRef<null>;
 
-
-  constructor(private hostElement: ElementRef, private renderer: Renderer2) {
+  ngAfterViewInit() {
+    this.viewContainer.createEmbeddedView(this.template);
   }
 
   ngAfterViewChecked() {
@@ -19,10 +34,7 @@ export class AppComponent implements AfterViewChecked {
   }
 
   remove() {
-    this.renderer.removeChild(
-      this.hostElement.nativeElement,
-      this.childComps.first.nativeElement
-    );
+    this.viewContainer.remove();
   }
 }
 
