@@ -10,6 +10,10 @@ import { BComponent } from './b.component';
     AComponent,
     BComponent
   ],
+  entryComponents: [
+    AComponent,
+    BComponent
+  ],
   imports: [
     BrowserModule
   ],
