@@ -1,10 +1,20 @@
-import { Component } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  template: `<span [addAttribute]="'highlight'">I want to be red</span>`,
-  styles: ['[highlight] {color: red}']
+  template: `
+    <button (click)="remove()">Remove child component</button>
+    <a-comp #c></a-comp>
+  `
 })
-export class AppComponent {
+export class AppComponent implements AfterViewChecked {
+  @ViewChildren('c', {read: ElementRef}) childComps: QueryList<ElementRef>;
+
+  ngAfterViewChecked() {
+    console.log('number of child components: ' + this.childComps.length);
+  }
+
+  remove() {
+  }
 }
 
