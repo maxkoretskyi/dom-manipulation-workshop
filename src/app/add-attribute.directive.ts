@@ -1,15 +1,15 @@
-import { Directive, ElementRef, Input } from '@angular/core';
+import { Directive, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
 
 @Directive({
   selector: '[addAttribute]'
 })
-export class AddAttributeDirective {
+export class AddAttributeDirective implements OnInit {
   @Input() addAttribute;
 
-  constructor(private element: ElementRef) {
+  constructor(private element: ElementRef, private renderer: Renderer2) {
   }
 
   ngOnInit() {
-    this.element.nativeElement.setAttribute(this.addAttribute, '');
+    this.renderer.setAttribute(this.element.nativeElement, this.addAttribute, '');
   }
 }
